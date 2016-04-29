@@ -1,0 +1,98 @@
+<h1 class="page-header">Orders</h1>
+<ul class="list-group">
+    <li class="list-group-item" ng-repeat="order in model.orders">
+        <div class="row">
+            <div class="col-sm-6 col-md-6">
+                <h4 ng-bind="order.timePlaced | date:'longDate'"></h4>
+                <h5 ng-bind="order.status"></h5>
+            </div>
+            <div class="text-right col-sm-6 col-md-6" ng-show="model.user && model.user.__t == 'ProjectManagerModel'">
+                <a ng-show="order.status == 'Pending'" class="btn btn-default" ng-click="model.confirmOrder(order)">Confirm Order</a>
+                <a ng-show="order.status == 'Confirmed'" class="btn btn-default" ng-click="model.markReady(order)">Mark Ready to Deliver</a>
+                <a ng-show="order.status == 'On Delivery'" class="btn btn-default" ng-click="model.trackDelivery(order)">Track Delivery</a>
+            </div>
+            <div class="text-right col-sm-6 col-md-6" ng-show="model.user && model.user.__t == 'ProjectDriverModel'">
+                <a ng-show="order.status == 'Ready to Deliver'" class="btn btn-default" ng-click="model.deliverOrder(order)">Deliver Order</a>
+                <a ng-show="order.status == 'On Delivery'" class="btn btn-default" ng-click="model.cancelDelivery(order)">Cancel Delivery</a>
+                <a ng-show="order.status == 'On Delivery'" class="btn btn-default" ng-click="model.completeDelivery(order)">Complete Delivery</a>
+            </div>
+            <div class="text-right col-sm-6 col-md-6" ng-show="model.user && model.user.__t == 'ProjectCustomerModel'">
+                <a ng-show="order.status == 'Pending'" class="btn btn-default" ng-click="model.cancelOrder(order)">Cancel Order</a>
+                <a ng-show="order.status == 'On Delivery'" class="btn btn-default" ng-click="model.trackDelivery(order)">Track Delivery</a>
+            </div>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="col-sm-1">Quantity</th>
+                    <th class="col-sm-9">Item Name</th>
+                    <th class="col-sm-2">Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in order.items">
+                    <td class="col-sm-1" ng-bind="item.quantity"></td>
+                    <td class="col-sm-9" ng-bind="item.name"></td>
+                    <td class="col-sm-2" ng-bind="item.price | currency"></td>
+                </tr>
+                <tr>
+                    <th class="col-sm-1"></th>
+                    <th class="col-sm-9">Total</th>
+                    <th class="col-sm-2" ng-bind="order.subtotal | currency"></th>
+                </tr>
+            </tbody>
+        </table>
+        <form class="form-horizontal" ng-show="model.user && model.user.__t == 'ProjectCustomerModel' && order.status == 'Delivered'">
+            <div class="form-group row">
+                <label class="col-sm-2 control-label">Items</label>
+                <div ng-hide="true" class="col-sm-10 btn-group" data-toggle="buttons">
+                    <label class="btn">
+                        <input type="radio" name="order.review.itemsRating" ng-model="order.review.itemsRating" value="1"> 1
+                    </label>
+                    <label class="btn">
+                        <input type="radio" name="order.review.itemsRating" ng-model="order.review.itemsRating" value="2"> 2
+                    </label>
+                    <label class="btn">
+                        <input type="radio" name="order.review.itemsRating" ng-model="order.review.itemsRating" value="3"> 3
+                    </label>
+                    <label class="btn">
+                        <input type="radio" name="order.review.itemsRating" ng-model="order.review.itemsRating" value="4"> 4
+                    </label>
+                    <label class="btn">
+                        <input type="radio" name="order.review.itemsRating" ng-model="order.review.itemsRating" value="5"> 5
+                    </label>
+                </div>
+                <div class="textarea-container">
+                    <textarea rows="4" class="col-sm-12" ng-model="order.review.itemsReview"></textarea>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 control-label">Delivery</label>
+                <div ng-hide="true" class="col-sm-10 btn-group" data-toggle="buttons">
+                    <label class="btn">
+                        <input type="radio" name="order.review.deliveryRating" ng-model="order.review.deliveryRating" value="1"> 1
+                    </label>
+                    <label class="btn">
+                        <input type="radio" name="order.review.deliveryRating" ng-model="order.review.deliveryRating" value="2"> 2
+                    </label>
+                    <label class="btn">
+                        <input type="radio" name="order.review.deliveryRating" ng-model="order.review.deliveryRating" value="3"> 3
+                    </label>
+                    <label class="btn">
+                        <input type="radio" name="order.review.deliveryRating" ng-model="order.review.deliveryRating" value="4"> 4
+                    </label>
+                    <label class="btn">
+                        <input type="radio" name="order.review.deliveryRating" ng-model="order.review.deliveryRating" value="5"> 5
+                    </label>
+                </div>
+                <div class="textarea-container">
+                    <textarea rows="4" class="col-sm-12" ng-model="order.review.deliveryReview"></textarea>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <a class="btn btn-default btn-block" ng-click="model.leaveReview(order)">Leave Review</a>
+            </div>
+            <div class="spacer"></div>
+        </form>
+    </li>
+</ul>

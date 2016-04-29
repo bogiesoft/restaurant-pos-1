@@ -1,0 +1,7 @@
+<h1 class="page-header">Manage Users</h1>
+<ul class="list-group">
+    <li class="list-group-item" ng-repeat="user in model.users">
+        <h4 ng-bind="user.firstName + ' ' + user.lastName"></h4>
+        <h5 ng-bind="model.getRole(user)"></h5>
+    </li>
+</ul>

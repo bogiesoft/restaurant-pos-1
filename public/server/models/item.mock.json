@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Fish and Chips",
+        "description": "Served with french fries.",
+        "price": 5.99
+    },
+    {
+        "name": "Spaghetti Bolognese",
+        "description": "The classic pasta.",
+        "price": 9.99
+    },
+    {
+        "name": "Cheese Cake",
+        "description": "Cake. With cheese.",
+        "price": 7.99
+    },
+    {
+        "name": "Diet Coke",
+        "description": "It still kills you.",
+        "price": 1.99
+    }
+]

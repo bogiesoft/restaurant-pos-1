@@ -1,0 +1,23 @@
+<nav class="navbar navbar-inverse navbar-fixed-top" ng-controller="HeaderController as model">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#/home">Restaurant Name</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li ng-class="{'active' : model.location.url() == '/login'}" ng-hide="model.user"><a href="#/login">Login</a></li>
+                <li ng-class="{'active' : model.location.url() == '/register'}" ng-hide="model.user"><a href="#/register">Sign Up</a></li>
+                <li ng-class="{'active' : model.location.url() == '/order'}" ng-show="model.user"><a href="#/order">Orders</a></li>
+                <li ng-class="{'active' : model.location.url() == '/user'}" ng-show="model.user && model.user.__t == 'ProjectManagerModel'"><a href="#/user">Manage Users</a></li>
+                <li ng-class="{'active' : model.location.url() == '/profile'}" ng-show="model.user"><a href="#/profile">Profile</a></li>
+                <li ng-class="{'active' : model.location.url() == '/logout'}" ng-show="model.user"><a href="#/logout">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
